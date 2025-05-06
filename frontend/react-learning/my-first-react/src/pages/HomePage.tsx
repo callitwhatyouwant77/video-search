@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Container, 
   Typography, 
-  Grid,
+  Grid as MuiGrid,
   Card, 
   CardMedia, 
   CardContent, 
@@ -180,9 +180,9 @@ const HomePage: React.FC = () => {
             <CircularProgress />
           </Box>
         ) : (
-          <Grid container spacing={3}>
+          <MuiGrid container spacing={3}>
             {featuredVideos.map((video) => (
-              <Grid item key={video.id} xs={12} sm={6} md={4}>
+              <MuiGrid item key={video.id} xs={12} sm={6} md={4}>
                 <Card 
                   sx={{ 
                     height: '100%', 
@@ -212,9 +212,9 @@ const HomePage: React.FC = () => {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </MuiGrid>
             ))}
-          </Grid>
+          </MuiGrid>
         )}
       </Box>
       
@@ -223,8 +223,8 @@ const HomePage: React.FC = () => {
         <Typography variant="h4" component="h2" sx={{ mb: 3, fontWeight: 'bold', textAlign: 'center' }}>
           主要功能
         </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
+        <MuiGrid container spacing={4}>
+          <MuiGrid item xs={12} md={4}>
             <Box sx={{ textAlign: 'center', p: 2 }}>
               <Box sx={{ 
                 width: 80, 
@@ -244,8 +244,8 @@ const HomePage: React.FC = () => {
                 根据视频台词关键词，精准定位到视频片段时间点，帮助创作者快速找到所需素材。
               </Typography>
             </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
+          </MuiGrid>
+          <MuiGrid item xs={12} md={4}>
             <Box sx={{ textAlign: 'center', p: 2 }}>
               <Box sx={{ 
                 width: 80, 
@@ -265,8 +265,8 @@ const HomePage: React.FC = () => {
                 快速找到您想要的视频，浏览更多相关内容，提高创作效率。
               </Typography>
             </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
+          </MuiGrid>
+          <MuiGrid item xs={12} md={4}>
             <Box sx={{ textAlign: 'center', p: 2 }}>
               <Box sx={{ 
                 width: 80, 
@@ -286,8 +286,8 @@ const HomePage: React.FC = () => {
                 基于您的浏览和搜索历史，智能推荐更多您可能感兴趣的视频内容。
               </Typography>
             </Box>
-          </Grid>
-        </Grid>
+          </MuiGrid>
+        </MuiGrid>
       </Box>
     </Container>
   );

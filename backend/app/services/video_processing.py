@@ -79,19 +79,24 @@ def split_video(video_path: str, start_time: float, end_time: float, output_path
         return False
 
 
-def transcribe_audio(audio_path: str, model_name: str = "base") -> List[Dict[str, Any]]:
+def transcribe_audio(audio_path: str, model_name: str = None) -> List[Dict[str, Any]]:
     """
     使用Whisper模型进行语音识别
     """
     try:
         from faster_whisper import WhisperModel
         
-        # 判断model_name是否是完整路径
-        if os.path.exists(model_name):
-            logger.info(f"使用自定义模型路径: {model_name}")
+        # 优先使用配置中的模型路径
+        if hasattr(settings, 'WHISPER_MODEL_PATH') and os.path.exists(settings.WHISPER_MODEL_PATH):
+            logger.info(f"使用配置的自定义模型路径: {settings.WHISPER_MODEL_PATH}")
+            model = WhisperModel(settings.WHISPER_MODEL_PATH, device="cuda", compute_type="float16")
+        # 如果提供了model_name且是完整路径
+        elif model_name and os.path.exists(model_name):
+            logger.info(f"使用传入的自定义模型路径: {model_name}")
             model = WhisperModel(model_name, device="cuda", compute_type="float16")
         else:
-            # 如果不是路径，则使用预设的模型名称
+            # 使用预设的模型名称
+            model_name = model_name or settings.WHISPER_MODEL
             logger.info(f"使用预设模型: {model_name}")
             model = WhisperModel(model_name, device="cuda", compute_type="float16")
         
